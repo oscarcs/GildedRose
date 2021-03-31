@@ -8,14 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb0962d1-4798-473e-bac2-ff4f2cd707c1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GildedRose/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GildedRose/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GildedRose/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GildedRose/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GildedRose/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GildedRose/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GildedRose.Console/GildedRose.Console.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/GildedRose.Console/GildedRose.Console.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GildedRose.Console/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/GildedRose.Console/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GildedRose.Console/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/GildedRose.Console/packages.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GildedRose.Tests/GildedRose.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/src/GildedRose.Tests/GildedRose.Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GildedRose.Tests/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/src/GildedRose.Tests/packages.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +80,7 @@
       <workItem from="1617149387636" duration="38000" />
       <workItem from="1617149617367" duration="735000" />
       <workItem from="1617150420810" duration="255000" />
-      <workItem from="1617150711688" duration="1575000" />
+      <workItem from="1617150711688" duration="4674000" />
     </task>
     <servers />
   </component>

@@ -7,7 +7,6 @@ namespace GildedRose.Console
     {
         IList<Item> Items;
         
-        private const int MaxQuality = 50;
         private const string AgedBrie = "Aged Brie";
         private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
         private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
@@ -43,76 +42,37 @@ namespace GildedRose.Console
 
         public static IList<Item> UpdateQuality(IList<Item> items)
         {
-            foreach(var item in items)
+            foreach (var item in items)
             {
-                if (item.Name != AgedBrie && item.Name != BackstagePasses)
+                UpdateableItem internalItem;
+                switch (item.Name)
                 {
-                    DecreaseQuality(item);
-                }
-                else
-                {
-                    IncreaseQuality(item);
-
-                    if (item.Name == BackstagePasses)
-                    {
-                        if (item.SellIn < 11)
-                        {
-                            IncreaseQuality(item);
-                        }
-
-                        if (item.SellIn < 6)
-                        {
-                            IncreaseQuality(item);
-                        }
-                    }
+                    case BackstagePasses:
+                        internalItem = new BackstagePasses() {Name = item.Name, Quality = item.Quality, SellIn = item.SellIn};
+                        break;
+                    case Sulfuras:
+                        internalItem = new Sulfuras() {Name = item.Name, Quality = item.Quality, SellIn = item.SellIn};
+                        break;
+                    case AgedBrie:
+                        internalItem = new AgedBrie() {Name = item.Name, Quality = item.Quality, SellIn = item.SellIn};
+                        break;
+                    default:
+                        internalItem = new NormalItem()
+                            {Name = item.Name, Quality = item.Quality, SellIn = item.SellIn};
+                        break;
                 }
 
-                if (item.Name != Sulfuras)
-                {
-                    item.SellIn = item.SellIn - 1;
-                }
+                internalItem.UpdateQuality();
 
-                if (item.SellIn < 0)
-                {
-                    if (item.Name != AgedBrie)
-                    {
-                        if (item.Name != BackstagePasses)
-                        {
-                            DecreaseQuality(item);
-                        }
-                        else
-                        {
-                            item.Quality = 0;
-                        }
-                    }
-                    else
-                    {
-                        IncreaseQuality(item);
-                    }
-                }
+                item.Name = internalItem.Name;
+                item.Quality = internalItem.Quality;
+                item.SellIn = internalItem.SellIn;
             }
 
             return items;
         }
 
-        private static void IncreaseQuality(Item item)
-        {
-            if (item.Quality < MaxQuality)
-            {
-                item.Quality = item.Quality + 1;
-            }
-        }
 
-        private static void DecreaseQuality(Item item)
-        {
-            if (item.Quality > 0)
-            {
-                if (item.Name != Sulfuras)
-                {
-                    item.Quality = item.Quality - 1;
-                }
-            }
-        }
     }
 
     public class Item
@@ -124,4 +84,92 @@ namespace GildedRose.Console
         public int Quality { get; set; }
     }
 
+    public abstract class UpdateableItem : Item
+    {
+        protected const int MaxQuality = 50;
+        protected const int MinQuality = 0;
+
+        public abstract void UpdateQuality();
+
+        protected void IncreaseQuality()
+        {
+            if (Quality < MaxQuality)
+            {
+                Quality = Quality + 1;
+            }
+        }
+
+        protected void DecreaseQuality()
+        {
+            if (Quality > MinQuality)
+            {
+                {
+                    Quality = Quality - 1;
+                }
+            }
+        }
+    }
+
+    public class NormalItem : UpdateableItem
+    {
+        public override void UpdateQuality()
+        {
+            DecreaseQuality();
+            
+            SellIn = SellIn - 1;
+
+            if (SellIn < 0)
+            {
+                DecreaseQuality();
+            }
+        }
+    }
+    
+    public class AgedBrie : UpdateableItem
+    {
+        public override void UpdateQuality()
+        {
+            IncreaseQuality();
+            
+            SellIn = SellIn - 1;
+
+            if (SellIn < 0)
+            {
+                IncreaseQuality();
+            }
+        }
+    }
+
+    public class BackstagePasses : UpdateableItem
+    {
+        public override void UpdateQuality()
+        {
+            IncreaseQuality();
+            
+            if (SellIn < 11)
+            {
+                IncreaseQuality();
+            }
+
+            if (SellIn < 6)
+            {
+                IncreaseQuality();
+            }
+            
+            SellIn = SellIn - 1;
+
+            if (SellIn < 0)
+            {
+                Quality = 0;
+            }
+        }
+    }
+
+    public class Sulfuras : UpdateableItem
+    {
+        public override void UpdateQuality()
+        {
+            
+        }
+    }
 }
